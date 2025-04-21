@@ -1,110 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Songs Player</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Heart shape CSS */
-        .heart {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            transform: rotate(-45deg);
-            background: linear-gradient(to right, #ff6a00, #ff3a3a);
-            border-radius: 50%;
-            margin: auto;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .heart:before,
-        .heart:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(to right, #ff6a00, #ff3a3a);
-        }
-
-        .heart:before {
-            left: 100px;
-        }
-
-        .heart:after {
-            left: -100px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LoveSong Player</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Great Vibes', cursive;
+    }
+    .glow {
+      box-shadow: 0 0 30px rgba(255, 192, 203, 0.7), 0 0 60px rgba(255, 105, 180, 0.5);
+    }
+    .heartbeat {
+      animation: heartbeat 1.5s infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+  </style>
 </head>
+<body class="min-h-screen bg-gradient-to-br from-pink-200 via-pink-300 to-purple-300 flex items-center justify-center p-4">
 
-<body class="bg-gradient-to-r from-pink-500 via-purple-500 to-red-500 min-h-screen flex justify-center items-center p-4">
+  <div class="text-center bg-white/30 backdrop-blur-md rounded-3xl p-8 glow max-w-md w-full">
+    
+    <!-- Heart Icon -->
+    <div class="text-5xl text-pink-600 heartbeat mb-4">❤️</div>
 
-    <div class="flex flex-col justify-center items-center">
-        <!-- Heart Container for Player -->
-        <div class="heart p-8 flex justify-center items-center relative">
-            <!-- Audio Player and Controls -->
-            <div class="text-center text-white">
-                <h1 class="text-3xl font-bold mb-4">Love Songs Playlist</h1>
-                <div class="mb-4 text-lg font-medium">Now Playing: "Perfect" - Ed Sheeran</div>
+    <!-- Title -->
+    <h1 class="text-4xl text-pink-700 mb-2">LoveSong</h1>
+    <p class="text-lg text-pink-600 mb-6 italic">"A melody for the heart..."</p>
 
-                <audio id="audioPlayer" controls class="w-full rounded-md">
-                    <source src="your-love-song.mp3" type="audio/mp3">
-                    Your browser does not support the audio element.
-                </audio>
+    <!-- Audio Player -->
+    <audio controls class="w-full rounded-lg shadow-lg">
+      <source src="your-love-song.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
 
-                <div class="mt-4">
-                    <button id="playPauseButton"
-                        class="bg-white text-pink-600 p-3 rounded-full text-lg mb-2 hover:bg-pink-600 hover:text-white transition-all">
-                        Play
-                    </button>
-                </div>
-
-                <div class="flex justify-center items-center mt-2">
-                    <span id="currentTime" class="mr-2 text-sm">00:00</span>
-                    <span>/</span>
-                    <span id="durationTime" class="ml-2 text-sm">00:00</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playPauseButton = document.getElementById('playPauseButton');
-        const currentTime = document.getElementById('currentTime');
-        const durationTime = document.getElementById('durationTime');
-
-        // Play/Pause button functionality
-        playPauseButton.addEventListener('click', () => {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playPauseButton.textContent = "Pause";
-            } else {
-                audioPlayer.pause();
-                playPauseButton.textContent = "Play";
-            }
-        });
-
-        // Update time display and background gradient
-        audioPlayer.addEventListener('timeupdate', () => {
-            const progress = audioPlayer.currentTime / audioPlayer.duration;
-            const currentMinutes = Math.floor(audioPlayer.currentTime / 60);
-            const currentSeconds = Math.floor(audioPlayer.currentTime % 60);
-            const durationMinutes = Math.floor(audioPlayer.duration / 60);
-            const durationSeconds = Math.floor(audioPlayer.duration % 60);
-
-            currentTime.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
-            durationTime.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
-
-            // Adjust the background gradient dynamically based on the song's progress
-            const colorProgress = Math.floor(progress * 255);
-            document.body.style.background = `linear-gradient(to right, rgb(${colorProgress}, 0, 255), rgb(255, ${255 - colorProgress}, 0))`;
-        });
-    </script>
+    <!-- Song Info -->
+    <p class="mt-4 text-pink-700 text-xl">Now playing: <span class="font-bold">"Perfect" - Ed Sheeran</span></p>
+  </div>
 
 </body>
-
 </html>
