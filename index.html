@@ -3,86 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cosmic Love Player</title>
+  <title>Dil Diyan Gallan - Love Theme</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Great Vibes', cursive;
-      background-color: #0d0d0d;
+      background: radial-gradient(circle at top, #000000 10%, #0a0a0a 100%);
       overflow: hidden;
     }
-
-    .glow {
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6), 0 0 50px rgba(255, 192, 203, 0.3);
-    }
-
-    .heartbeat {
-      animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    .falling-heart {
+    .heart {
       position: absolute;
+      top: -50px;
+      color: #ff6ec4;
+      font-size: 24px;
       animation: fall linear infinite;
-      width: 24px;
-      opacity: 0.7;
+      opacity: 0.8;
     }
-
     @keyframes fall {
-      0% {
-        transform: translateY(-20px);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh);
+      to {
+        transform: translateY(120vh);
         opacity: 0;
       }
     }
   </style>
 </head>
-<body class="flex items-center justify-center h-screen relative text-white">
+<body class="text-white font-sans h-screen relative flex flex-col justify-center items-center text-center px-4">
 
-  <!-- Falling Heart Icons -->
+  <!-- Audio Player -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-pink-400 mb-4">Dil Diyan Gallan 💖</h1>
+    <audio controls class="w-full max-w-sm rounded-full shadow-lg">
+      <source src="YOUR_SONG.mp3" type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Lyrics -->
+  <div class="max-w-xl text-pink-200 text-lg leading-relaxed space-y-2 italic z-10">
+    <p>Tainu lakkhan ton chhupa ke</p>
+    <p>Rakkhan akkhan 'te saja ke</p>
+    <p>Tu hai meri wafa, rakh apna bana ke</p>
+    <p>Main tere laiyan, tere laiyan, yaara</p>
+    <p>Na paavi kade dooriyan, haaye</p>
+    <p>Main jeena haan tera</p>
+    <p>Tu jeena hai mera</p>
+    <p>Dass, laina ki nakhra dikha ke?</p>
+    <p>Dil diyan gallan</p>
+    <p>Karange naal-naal beh ke</p>
+    <p>Akh naale akh nu mila ke</p>
+  </div>
+
+  <!-- Falling Hearts -->
   <script>
-    for (let i = 0; i < 40; i++) {
-      const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      heart.setAttribute("class", "falling-heart text-pink-400");
-      heart.setAttribute("fill", "currentColor");
-      heart.setAttribute("viewBox", "0 0 20 20");
-      heart.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-      heart.innerHTML = `<path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />`;
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
-      heart.style.top = '-' + Math.random() * 100 + 'px';
-      heart.style.transform = `scale(${Math.random() * 1.2 + 0.4})`;
+    const colors = ["#ff6ec4", "#fca5a5", "#f472b6", "#fcd34d"];
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      heart.style.fontSize = (16 + Math.random() * 24) + "px";
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
       document.body.appendChild(heart);
     }
   </script>
-
-  <!-- Music Player Card -->
-  <div class="backdrop-blur-md bg-white/10 rounded-3xl p-8 glow max-w-md w-full z-10 border border-pink-400">
-    <!-- Heart Icon (centered, animated) -->
-    <div class="flex justify-center mb-4">
-      <svg class="w-16 h-16 text-pink-400 heartbeat" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-      </svg>
-    </div>
-
-    <h1 class="text-4xl text-pink-200 text-center mb-2">Eternal Vibes</h1>
-    <p class="text-lg text-pink-400 italic text-center mb-6">"A galaxy of love in every note"</p>
-
-    <audio controls class="w-full rounded-lg">
-      <source src="your-love-song.mp3" type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio>
-
-    <p class="mt-4 text-pink-300 text-center text-xl">Now playing: <span class="font-bold">"Until I Found You" - Stephen Sanchez</span></p>
-  </div>
-
 </body>
 </html>
