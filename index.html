@@ -4,46 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Player</title>
+    <title>Love Songs Player</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Heart shape CSS */
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform: rotate(-45deg);
+            background: linear-gradient(to right, #ff6a00, #ff3a3a);
+            border-radius: 50%;
+            margin: auto;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #ff6a00, #ff3a3a);
+        }
+
+        .heart:before {
+            left: 100px;
+        }
+
+        .heart:after {
+            left: -100px;
+        }
+    </style>
 </head>
 
-<body class="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 transition-all duration-500">
+<body class="bg-gradient-to-r from-pink-500 via-purple-500 to-red-500 min-h-screen flex justify-center items-center p-4">
 
-    <div class="relative bg-opacity-70 rounded-xl p-6 w-full max-w-lg text-white shadow-lg flex flex-col items-center">
-        <h1 class="text-3xl font-bold mb-4">Now Playing</h1>
-        
-        <!-- Song Title -->
-        <div class="mb-4 text-xl font-medium" id="songTitle">Song Title - Artist</div>
-        
-        <!-- Audio Player -->
-        <audio id="audioPlayer" controls class="w-full mb-4 rounded-md">
-            <source src="path_to_your_song.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+    <div class="flex flex-col justify-center items-center">
+        <!-- Heart Container for Player -->
+        <div class="heart p-8 flex justify-center items-center relative">
+            <!-- Audio Player and Controls -->
+            <div class="text-center text-white">
+                <h1 class="text-3xl font-bold mb-4">Love Songs Playlist</h1>
+                <div class="mb-4 text-lg font-medium">Now Playing: "Perfect" - Ed Sheeran</div>
 
-        <!-- Play/Pause Button -->
-        <button id="playPauseButton" class="bg-blue-500 p-3 rounded-full text-lg mb-2 hover:bg-blue-600 transition-all">
-            Play
-        </button>
+                <audio id="audioPlayer" controls class="w-full rounded-md">
+                    <source src="your-love-song.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
 
-        <!-- Time Display -->
-        <div class="flex space-x-2 text-sm">
-            <span id="currentTime">00:00</span>
-            <span>/</span>
-            <span id="durationTime">00:00</span>
+                <div class="mt-4">
+                    <button id="playPauseButton"
+                        class="bg-white text-pink-600 p-3 rounded-full text-lg mb-2 hover:bg-pink-600 hover:text-white transition-all">
+                        Play
+                    </button>
+                </div>
+
+                <div class="flex justify-center items-center mt-2">
+                    <span id="currentTime" class="mr-2 text-sm">00:00</span>
+                    <span>/</span>
+                    <span id="durationTime" class="ml-2 text-sm">00:00</span>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         const audioPlayer = document.getElementById('audioPlayer');
         const playPauseButton = document.getElementById('playPauseButton');
-        const songTitle = document.getElementById('songTitle');
         const currentTime = document.getElementById('currentTime');
         const durationTime = document.getElementById('durationTime');
-
-        // Example title and artist (can be dynamically set)
-        songTitle.textContent = "Blinding Lights - The Weeknd";
 
         // Play/Pause button functionality
         playPauseButton.addEventListener('click', () => {
@@ -67,11 +99,12 @@
             currentTime.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
             durationTime.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
 
-            // Change background gradient based on progress
+            // Adjust the background gradient dynamically based on the song's progress
             const colorProgress = Math.floor(progress * 255);
             document.body.style.background = `linear-gradient(to right, rgb(${colorProgress}, 0, 255), rgb(255, ${255 - colorProgress}, 0))`;
         });
     </script>
+
 </body>
 
 </html>
